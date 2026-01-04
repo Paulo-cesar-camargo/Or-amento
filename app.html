@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Planilha Camargo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Honk:MORF@41&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="topo">
+  <button class="theme-btn" onclick="setTema('light')">☀️</button>
+  <span class="bungee-spice-regular">📊 Planilha Camargo</span>
+  <button class="theme-btn" onclick="setTema('dark')">🌙</button>
+</header>
+
+<main class="container">
+
+  <section class="mes">
+    <input type="month" id="mesSelecionado">
+    <button onclick="carregarMes()">Carregar</button>
+    <button class="fechar" onclick="fecharMes()">Fechar Mês</button>
+  </section>
+
+  <section class="form">
+    <input type="date" id="data">
+    <input type="text" id="descricao" placeholder="Descrição">
+    <select id="tipo">
+      <option value="entrada">Entrada</option>
+      <option value="saida">Saída</option>
+    </select>
+    <input type="number" id="valor" placeholder="Valor" step="0.01">
+    <button onclick="adicionarRegistro()">Adicionar</button>
+  </section>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Entrada</th>
+        <th>Saída</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tabela"></tbody>
+  </table>
+
+  <div id="saldo" class="saldo">Saldo Atual: R$ 0,00</div>
+  <br>
+  <button class="imprimir" onclick="imprimirMes()">🖨️ Imprimir Mês</button>
+
+
+</main>
+
+<script src="script.js"></script>
+<script>
+  if (localStorage.getItem("logado") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+</body>
+</html>

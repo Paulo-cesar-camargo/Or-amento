@@ -1,0 +1,159 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f8;
+  color: #333;
+}
+
+/* LOGIN */
+.login {
+  max-width: 360px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.login input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login button {
+  width: 100%;
+  padding: 12px;
+  background: #1e3c72;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+}
+
+/* HEADER */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  padding: 14px;
+}
+
+.theme-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  border-radius: 50%;
+  padding: 6px 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 16px auto;
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+/* GRID */
+.mes, .form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+input, select, button {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.entrada { color: green; font-weight: bold; }
+.saida { color: red; font-weight: bold; }
+
+/* SALDO */
+.saldo {
+  margin-top: 16px;
+  padding: 12px;
+  text-align: center;
+  font-size: 1.1rem;
+  background: #f0f2f5;
+  border-radius: 8px;
+}
+/* ====== MODO ESCURO ====== */
+body.dark {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+body.dark .container {
+  background: #1e1e1e;
+}
+
+body.dark input,
+body.dark select,
+body.dark button {
+  background: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+body.dark table th,
+body.dark table td {
+  border-color: #333;
+}
+
+body.dark .saldo {
+  background: #2a2a2a;
+}
+
+body.dark .login {
+  background: #1e1e1e;
+}
+
+body.dark .topo {
+  background: linear-gradient(135deg, #000428, #004e92);
+}
+.bungee-spice-regular {
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+button.imprimir {
+  background: #2ecc71;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button.imprimir:hover {
+  background: #27ae60;
+}
