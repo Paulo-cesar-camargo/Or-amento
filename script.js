@@ -1,5 +1,5 @@
 /* ================= CONFIGURAÇÃO ================= */
-const SENHA = "camargo123";
+const SENHA = "DeusNoControle";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKN8i6RYpxpaBCii1A4sxYJ2pcPTzrRxyG_B80cDpOiGX8ro-pB362g1GAH1QF1zM/exec";
 
 let dados = {};
