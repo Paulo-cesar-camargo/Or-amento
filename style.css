@@ -157,3 +157,40 @@ button.imprimir {
 button.imprimir:hover {
   background: #27ae60;
 }
+/* ================= RESUMO FINANCEIRO ================= */
+.resumo {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #f5f5f5;
+  font-size: 18px;
+}
+
+body.dark .resumo {
+  background: #1e1e1e;
+}
+
+#totalEntradas {
+  color: #2e7d32; /* verde */
+  font-weight: bold;
+}
+
+#totalSaidas {
+  color: #d47878; /* vermelho */
+  font-weight: bold;
+}
+
+#saldoTotal {
+  color: #103f75; /* azul */
+  font-weight: bold;
+}
+
+/* Saldo negativo */
+.saldo-negativo {
+  color: #b71c1c !important;
+}
+
+/* Saldo positivo */
+.saldo-positivo {
+  color: #2391a5 !important;
+}
