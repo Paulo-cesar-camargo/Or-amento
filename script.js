@@ -4,7 +4,6 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKN8i6RYpxpaBCii1A4
 
 let dados = {};
 let mesAtual = "";
-let saldo = 0;
 
 /* ================= LOGIN ================= */
 function entrar() {
@@ -45,20 +44,23 @@ window.onload = () => {
 function carregarMes() {
   mesAtual = document.getElementById("mesSelecionado").value;
   const registros = dados[mesAtual] || [];
-  saldo = 0;
+
+  let totalEntradas = 0;
+  let totalSaidas = 0;
 
   const tabela = document.getElementById("tabela");
   tabela.innerHTML = "";
 
   registros.forEach((r, i) => {
-    let entrada = "", saida = "";
+    let entrada = "";
+    let saida = "";
 
     if (r.tipo === "entrada") {
       entrada = r.valor.toFixed(2);
-      saldo += r.valor;
+      totalEntradas += r.valor;
     } else {
       saida = r.valor.toFixed(2);
-      saldo -= r.valor;
+      totalSaidas += r.valor;
     }
 
     const tr = document.createElement("tr");
@@ -72,22 +74,37 @@ function carregarMes() {
     tabela.appendChild(tr);
   });
 
-  document.getElementById("saldo").innerText =
-    `Saldo Atual: R$ ${saldo.toFixed(2)}`;
+  const saldoTotal = totalEntradas - totalSaidas;
+
+  document.getElementById("totalEntradas").innerText =
+    totalEntradas.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  document.getElementById("totalSaidas").innerText =
+    totalSaidas.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  document.getElementById("saldoTotal").innerText =
+    saldoTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+    const saldoEl = document.getElementById("saldoTotal");
+
+saldoEl.classList.remove("saldo-positivo", "saldo-negativo");
+saldoEl.classList.add(saldoTotal < 0 ? "saldo-negativo" : "saldo-positivo");
+
 }
 
+/* ================= REGISTROS ================= */
 function adicionarRegistro() {
   const data = document.getElementById("data").value;
   const descricao = document.getElementById("descricao").value;
   const tipo = document.getElementById("tipo").value;
   const valor = parseFloat(document.getElementById("valor").value);
 
-  if (!data || !descricao || isNaN(valor)) {
-    alert("Preencha todos os campos");
+  if (!data || !descricao || !tipo || isNaN(valor) || valor <= 0) {
+    alert("Preencha todos os campos corretamente");
     return;
   }
 
-  const registro = { data, descricao, tipo, valor, mes: mesAtual };
+  const registro = { data, descricao, tipo, valor };
 
   if (!dados[mesAtual]) dados[mesAtual] = [];
   dados[mesAtual].push(registro);
@@ -100,8 +117,8 @@ function adicionarRegistro() {
   document.getElementById("valor").value = "";
 }
 
-function deletar(i) {
-  dados[mesAtual].splice(i, 1);
+function deletar(index) {
+  dados[mesAtual].splice(index, 1);
   salvarLocal();
   carregarMes();
 }
@@ -122,16 +139,13 @@ function salvarLocal() {
 function salvarNoGoogleSheets(registro) {
   fetch(SCRIPT_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "text/plain;charset=utf-8"
-    },
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(registro)
   })
   .then(r => r.text())
   .then(txt => console.log("Sheets:", txt))
   .catch(err => console.error(err));
 }
-
 
 /* ================= IMPRESSÃO ================= */
 function imprimirMes() {
@@ -140,41 +154,44 @@ function imprimirMes() {
     return;
   }
 
+  let totalEntradas = 0;
+  let totalSaidas = 0;
+
   let html = `
-    <html>
-    <head>
-      <title>Planilha Camargo - ${mesAtual}</title>
-      <style>
-        body { font-family: Arial; padding: 20px; }
-        table { width:100%; border-collapse: collapse; }
-        th, td { border:1px solid #ccc; padding:8px; text-align:center; }
-        .entrada { color:green; font-weight:bold; }
-        .saida { color:red; font-weight:bold; }
-        .saldo { margin-top:20px; font-size:18px; text-align:right; }
-      </style>
-    </head>
-    <body>
-      <h2>📊 Planilha Camargo</h2>
-      <p><strong>Mês:</strong> ${mesAtual}</p>
-      <table>
-        <tr>
-          <th>Data</th>
-          <th>Descrição</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-        </tr>
+  <html>
+  <head>
+    <title>Planilha Camargo - ${mesAtual}</title>
+    <style>
+      body { font-family: Arial; padding: 20px; }
+      table { width:100%; border-collapse: collapse; }
+      th, td { border:1px solid #ccc; padding:8px; text-align:center; }
+      .entrada { color:green; font-weight:bold; }
+      .saida { color:red; font-weight:bold; }
+      .resumo { margin-top:20px; font-size:18px; text-align:right; }
+    </style>
+  </head>
+  <body>
+    <h2>📊 Planilha Camargo</h2>
+    <p><strong>Mês:</strong> ${mesAtual}</p>
+    <table>
+      <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Entrada</th>
+        <th>Saída</th>
+      </tr>
   `;
 
-  let total = 0;
-
   dados[mesAtual].forEach(r => {
-    let ent = "", sai = "";
+    let ent = "";
+    let sai = "";
+
     if (r.tipo === "entrada") {
       ent = r.valor.toFixed(2);
-      total += r.valor;
+      totalEntradas += r.valor;
     } else {
       sai = r.valor.toFixed(2);
-      total -= r.valor;
+      totalSaidas += r.valor;
     }
 
     html += `
@@ -187,11 +204,17 @@ function imprimirMes() {
     `;
   });
 
+  const saldoTotal = totalEntradas - totalSaidas;
+
   html += `
-      </table>
-      <div class="saldo">Saldo do mês: R$ ${total.toFixed(2)}</div>
-    </body>
-    </html>
+    </table>
+    <div class="resumo">
+      <p>Total de Entradas: R$ ${totalEntradas.toFixed(2)}</p>
+      <p>Total de Saídas: R$ ${totalSaidas.toFixed(2)}</p>
+      <strong>Saldo do mês: R$ ${saldoTotal.toFixed(2)}</strong>
+    </div>
+  </body>
+  </html>
   `;
 
   const win = window.open("", "", "width=900,height=650");
