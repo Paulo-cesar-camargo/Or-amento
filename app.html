@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <title>Planilha Camargo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Honk:MORF@41&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,12 +21,14 @@
 
 <main class="container">
 
+  <!-- SELEÇÃO DO MÊS -->
   <section class="mes">
     <input type="month" id="mesSelecionado">
     <button onclick="carregarMes()">Carregar</button>
     <button class="fechar" onclick="fecharMes()">Fechar Mês</button>
   </section>
 
+  <!-- FORMULÁRIO -->
   <section class="form">
     <input type="date" id="data">
     <input type="text" id="descricao" placeholder="Descrição">
@@ -36,6 +40,7 @@
     <button onclick="adicionarRegistro()">Adicionar</button>
   </section>
 
+  <!-- TABELA -->
   <table>
     <thead>
       <tr>
@@ -49,10 +54,24 @@
     <tbody id="tabela"></tbody>
   </table>
 
-  <div id="saldo" class="saldo">Saldo Atual: R$ 0,00</div>
-  <br>
-  <button class="imprimir" onclick="imprimirMes()">🖨️ Imprimir Mês</button>
+  <!-- RESUMO FINANCEIRO -->
+  <section class="resumo">
+    <p>Total de Entradas:
+      <strong id="totalEntradas">R$ 0,00</strong>
+    </p>
 
+    <p>Total de Saídas:
+      <strong id="totalSaidas">R$ 0,00</strong>
+    </p>
+
+    <p class="saldo-final">
+      Saldo Total:
+      <strong id="saldoTotal">R$ 0,00</strong>
+    </p>
+  </section>
+
+  <!-- IMPRESSÃO -->
+  <button class="imprimir" onclick="imprimirMes()">🖨️ Imprimir Mês</button>
 
 </main>
 
@@ -62,6 +81,10 @@
     window.location.href = "login.html";
   }
 </script>
+
 </body>
 </html>
+
+
+
 
