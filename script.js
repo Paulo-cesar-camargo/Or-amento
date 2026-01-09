@@ -1,3 +1,4 @@
+
 /* ================= CONFIGURAÇÃO ================= */
 const SENHA = "DeusNoControle";
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKN8i6RYpxpaBCii1A4sxYJ2pcPTzrRxyG_B80cDpOiGX8ro-pB362g1GAH1QF1zM/exec";
@@ -160,7 +161,7 @@ function imprimirMes() {
   let html = `
   <html>
   <head>
-    <title>Planilha Camargo - ${mesAtual}</title>
+    <title>Planilha - ${mesAtual}</title>
     <style>
       body { font-family: Arial; padding: 20px; }
       table { width:100%; border-collapse: collapse; }
@@ -171,7 +172,7 @@ function imprimirMes() {
     </style>
   </head>
   <body>
-    <h2>📊 Planilha Camargo</h2>
+    <h2>📊 Planilha </h2>
     <p><strong>Mês:</strong> ${mesAtual}</p>
     <table>
       <tr>
