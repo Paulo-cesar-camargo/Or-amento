@@ -20,6 +20,9 @@
 </header>
 
 <main class="container">
+  <div class="banner">
+  <img src="img/banner.png" alt="Banner">
+</div>
 
   <!-- SELEÇÃO DO MÊS -->
   <section class="mes">
@@ -37,7 +40,9 @@
       <option value="saida">Saída</option>
     </select>
     <input type="number" id="valor" placeholder="Valor" step="0.01">
-    <button onclick="adicionarRegistro()">Adicionar</button>
+
+    <!-- 🔥 IMPORTANTE: ID ADICIONADO -->
+    <button id="btnAdicionar" onclick="adicionarRegistro()">Adicionar</button>
   </section>
 
   <!-- TABELA -->
@@ -48,7 +53,7 @@
         <th>Descrição</th>
         <th>Entrada</th>
         <th>Saída</th>
-        <th></th>
+        <th>Ações</th> <!-- 🔥 NOVO -->
       </tr>
     </thead>
     <tbody id="tabela"></tbody>
@@ -68,6 +73,7 @@
       Saldo Total:
       <strong id="saldoTotal">R$ 0,00</strong>
     </p>
+    <canvas id="graficoFinanceiro" height="100"></canvas>
   </section>
 
   <!-- IMPRESSÃO -->
@@ -76,6 +82,8 @@
 </main>
 
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
   if (localStorage.getItem("logado") !== "true") {
     window.location.href = "login.html";
@@ -84,9 +92,3 @@
 
 </body>
 </html>
-
-
-
-
-
-

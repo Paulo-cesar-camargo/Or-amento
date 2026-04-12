@@ -1,3 +1,5 @@
+
+
 * {
   box-sizing: border-box;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -193,4 +195,17 @@ body.dark .resumo {
 /* Saldo positivo */
 .saldo-positivo {
   color: #2391a5 !important;
+}
+/*===================banner====================*/
+.banner {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.banner img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 10px;
 }
